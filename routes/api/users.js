@@ -1,17 +1,31 @@
 const User = require('../../db').User
 const route = require('express').Router()
+var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
 
 route.post('/signin', (req, res) => {
-
     User.findOne({
         where: {
-            email: req.body.email,
-            password: req.body.password
+            email: req.body.email
         }
     })
         .then((users) => {
             if (users)
-                res.status(200).send(users)
+            {
+                if (!bcrypt.compareSync(req.body.password, users.password)) {
+                    return res.status(401).json({
+                        title: 'Login failed',
+                        error: {message: 'Invalid login credentials'}
+                    });
+                }
+                var token = jwt.sign({user: users}, 'secret', {expiresIn: 7200});
+                res.status(200).json({
+                    message: 'Successfully logged in',
+                    token: token,
+                    userId: users._id
+                });
+            }
+                
             else
                 res.status(500).send({
                     error: "Invalid email or password"
@@ -38,7 +52,7 @@ route.post('/', (req, res) => {
         college: req.body.college,
         phoneNumber: req.body.number,
         address: req.body.address,
-        password: req.body.password
+        password: bcrypt.hashSync(req.body.password, 10)
     }).then((user) => {
         res.status(201).send(user)
     }).catch((err) => {
