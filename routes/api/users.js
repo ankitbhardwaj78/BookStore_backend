@@ -2,8 +2,6 @@ const User = require('../../db').User
 const route = require('express').Router()
 
 route.post('/signin', (req, res) => {
-    // We want to send an array of all users
-    // From our database here
 
     User.findOne({
         where: {
@@ -30,7 +28,7 @@ route.post('/signin', (req, res) => {
 })
 
 route.post('/', (req, res) => {
-    // We expect the req to have name in it
+    // We expect the req to have name,email,password,address,college,phn number in it
     // We will create a new user 
     console.log("in post");
 
