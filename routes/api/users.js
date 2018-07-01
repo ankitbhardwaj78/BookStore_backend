@@ -1,17 +1,29 @@
 const User = require('../../db').User
 const route = require('express').Router()
 
-route.get('/', (req, res) => {
+route.post('/signin', (req, res) => {
     // We want to send an array of all users
     // From our database here
 
-    User.findAll()
+    User.findOne({
+        where: {
+            email: req.body.email,
+            password: req.body.password
+        }
+    })
         .then((users) => {
-            res.status(200).send(users)
+            if (users)
+                res.status(200).send(users)
+            else
+                res.status(500).send({
+                    error: "Invalid email or password"
+                })
         })
         .catch((err) => {
+            console.log(err);
+
             res.status(500).send({
-                error: "Could not retrive users"
+                error: "Invalid email or password"
             })
         })
 
@@ -20,7 +32,7 @@ route.get('/', (req, res) => {
 route.post('/', (req, res) => {
     // We expect the req to have name in it
     // We will create a new user 
-console.log("in post");
+    console.log("in post");
 
     User.create({
         name: req.body.name,
@@ -33,9 +45,9 @@ console.log("in post");
         res.status(201).send(user)
     }).catch((err) => {
         console.log(err);
-        
+
         res.status(501).send({
-            
+
             error: err.errors
         })
     })
