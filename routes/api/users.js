@@ -18,11 +18,13 @@ route.post('/signin', (req, res) => {
                         error: {message: 'Invalid login credentials'}
                     });
                 }
-                var token = jwt.sign({user: users}, 'secret', {expiresIn: 7200});
+                console.log(users["dataValues"].id);
+                
+                var token = jwt.sign({user: users}, 'secret', {expiresIn: 720000});
                 res.status(200).json({
                     message: 'Successfully logged in',
                     token: token,
-                    userId: users._id
+                    userId: users["dataValues"].id
                 });
             }
                 
