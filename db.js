@@ -86,7 +86,7 @@ const Listing = db.define('listings', {
         primaryKey: true
     },
     image: {
-        type: Sequelize.BLOB('long'),
+        type: Sequelize.STRING,
         allowNull: false
     },
     bookname: {
