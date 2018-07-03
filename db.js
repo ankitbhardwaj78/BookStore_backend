@@ -95,7 +95,7 @@ const Listing = db.define('listings', {
         validate: {
             len: {
               args: [0, 100],
-              msg: 'Number of character should be less than 50'
+              msg: 'Number of character should be less than 100'
             }
           }
     },
@@ -105,7 +105,7 @@ const Listing = db.define('listings', {
         validate: {
             len: {
                 args: [0, 100],
-                msg: 'Number of character should be less than 50'
+                msg: 'Number of character should be less than 100'
             }
         }
     },
@@ -117,10 +117,20 @@ const Listing = db.define('listings', {
 
 Listing.belongsTo(User);
 
+const Wishlist = db.define('wishlists',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    }
+})
+Wishlist.belongsTo(User);
+Wishlist.belongsTo(Listing);
+
 db.sync()
     .then(() => console.log("Database has been synced"))
     .catch((err) => console.error("Error creating database"))
 
 exports = module.exports = {
-    User, Listing
+    User, Listing ,Wishlist
 }
