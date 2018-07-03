@@ -12,31 +12,33 @@ route.post('/signin', (req, res) => {
         .then((users) => {
             if (users) {
                 if (!bcrypt.compareSync(req.body.password, users.password)) {
+                    req.session.user = null;
                     return res.status(401).send({
                         title: 'Login failed',
                         error: { message: 'Invalid login credentials' }
                     });
                 }
                 console.log(users["dataValues"].id);
-                req.session.email = req.body.email;
-                req.session.userId = users["dataValues"].id;
-                //res.end('done');
-                var token = jwt.sign({ user: users }, 'secret', { expiresIn: 720000 });
+                req.session.user = users;
+                // var token = jwt.sign({ user: users }, 'secret', { expiresIn: 720000 });
                 res.status(200).send({
                     message: 'Successfully logged in',
-                    token: token,
+                    //token: token,
                     userId: users["dataValues"].id
                 });
             }
 
             else
+            {
+                req.session.user = null;
                 res.status(500).send({
                     error: "Invalid email or password"
                 })
+            }
         })
         .catch((err) => {
             console.log(err);
-
+            req.session.user = null;
             res.status(500).send({
                 error: "Invalid email or password"
             })
@@ -84,7 +86,7 @@ route.get('/logout', function (req, res) {
 })
 
 route.get('/isloggedin', function (req, res) {
-    if(req.session.email)
+    if(req.session.user)
     {
         res.send({
             done:true,

@@ -1,6 +1,7 @@
 const route = require('express').Router()
 const Listing = require('../../db').Listing
 const multer = require('multer');
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/');
@@ -27,7 +28,8 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-route.get('/', (req, res) => {
+route.get('/', (req, res) => {   
+    console.log(req.session.user); 
     Listing.findAll()
         .then((listings) => {
             res.status(200).send(listings)
@@ -41,25 +43,32 @@ route.get('/', (req, res) => {
 
 route.post('/add', upload.single('bookimage'), (req, res) => {
     console.log("in add");
-    console.log(req.body);
-    Listing.create({
-        bookname: req.body.bookname,
-        authorname: req.body.authorname,
-        image: req.file.path,
-        condition: req.body.condition,
-        price: req.body.price,
-    }).then((listing) => {
-        res.status(201).send(listing)
-    }).catch((err) => {
-        console.log(err);
+    if (req.session.user) {
+        Listing.create({
+            bookname: req.body.bookname,
+            authorname: req.body.authorname,
+            image: req.file.path,
+            condition: req.body.condition,
+            price: req.body.price,
+            userId: parseInt(req.session.user.id)
+        }).then((listing) => {
+            res.status(201).send(listing)
+        }).catch((err) => {
+            console.log(err);
 
+            res.status(501).send({
+
+                error: err
+            })
+        })
+
+    }
+    else{
         res.status(501).send({
 
-            error: err.errors
+            error: "not logged in"
         })
-    })
-
-
+    }
 })
 
 

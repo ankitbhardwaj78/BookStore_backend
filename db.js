@@ -110,8 +110,8 @@ const Listing = db.define('listings', {
         }
     },
     condition: {
-        type: Sequelize.ENUM,
-        values: ['New', 'Almost New', 'Slight damage', 'Worn']
+        type: Sequelize.STRING,
+        allowNull:false
     }
 })
 

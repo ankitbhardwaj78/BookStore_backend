@@ -4,9 +4,10 @@ var session = require('express-session');
 
 const app = express();
 
+app.use(session({ secret: 'Ankit' ,saveUninitialized:true,resave:false}));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(session({ secret: 'Ankit' ,saveUninitialized:true,resave:false}));
+
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
