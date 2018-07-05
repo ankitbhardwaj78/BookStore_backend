@@ -99,6 +99,10 @@ const Listing = db.define('listings', {
             }
           }
     },
+    price:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     authorname: {
         type: Sequelize.STRING,
         allowNull: false,

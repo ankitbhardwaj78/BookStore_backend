@@ -28,22 +28,110 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-route.get('/', (req, res) => {   
-    console.log(req.session.user); 
-    Listing.findAll()
-        .then((listings) => {
-            res.status(200).send(listings)
-        })
-        .catch((err) => {
-            res.status(500).send({
-                error: "Could not retrive listings"
+route.get('/', (req, res) => {
+    console.log(req.session.user);
+    if (req.session.user) {
+        Listing.findAll()
+            .then((listings) => {
+                res.status(200).send(listings)
             })
+            .catch((err) => {
+                res.status(500).send({
+                    error: "Could not retrive listings"
+                })
+            })
+    }
+    else {
+        res.status(501).send({
+
+            error: "not logged in"
         })
+    }
 })
+
+route.post('/search', (req, res) => {
+    console.log(req.session.user);
+    if (req.session.user) {
+        Listing.findAll({
+            where: {
+                $or: [
+                    { 'bookname': { like: '%' + req.body.query + '%' } },
+                    { 'authorname': { like: '%' + req.body.query + '%' } }
+                ]
+            }
+        })
+            .then((listings) => {
+                res.status(200).send(listings)
+            })
+            .catch((err) => {
+                res.status(500).send({
+                    error: "Could not retrive listings"
+                })
+            })
+    }
+    else {
+        res.status(501).send({
+            error: "not logged in"
+        })
+    }
+})
+
+
+route.post('/filter', (req, res) => {
+    console.log(req.session.user);
+    if (req.session.user) {
+        if(isNaN(req.body.from) || isNaN(req.body.to))
+        {
+            return res.status(501).send({
+                error:"Not a valid price range"
+            })
+        }
+        Listing.findAll({
+            where: {
+                $or: [
+                    {
+                        price: {
+                            $between: [parseInt(req.body.from), parseInt(req.body.to)]
+                        }
+                    },
+                    {
+                        condition: 
+                        {
+                            $eq: req.body.condition
+                        }
+                    }
+                ]
+            }
+        })
+            .then((listings) => {
+                res.status(200).send(listings)
+            })
+            .catch((err) => {
+                console.log(err);
+                
+                res.status(500).send({
+                    error: "Could not retrive listings"
+                })
+            })
+    }
+    else {
+        res.status(501).send({
+            error: "not logged in"
+        })
+    }
+})
+
+
 
 route.post('/add', upload.single('bookimage'), (req, res) => {
     console.log("in add");
     if (req.session.user) {
+        if(isNaN(req.body.price))
+        {
+           return res.status(501).send({
+                error: "Not A valid Price"
+            })
+        }
         Listing.create({
             bookname: req.body.bookname,
             authorname: req.body.authorname,
@@ -63,7 +151,7 @@ route.post('/add', upload.single('bookimage'), (req, res) => {
         })
 
     }
-    else{
+    else {
         res.status(501).send({
 
             error: "not logged in"
