@@ -77,30 +77,17 @@ route.post('/search', (req, res) => {
 })
 
 
-route.post('/filter', (req, res) => {
+route.post('/filterByCondition', (req, res) => {
     console.log(req.session.user);
+    console.log(req.body.from, req.body.to);
+
     if (req.session.user) {
-        if(isNaN(req.body.from) || isNaN(req.body.to))
-        {
-            return res.status(501).send({
-                error:"Not a valid price range"
-            })
-        }
         Listing.findAll({
             where: {
-                $or: [
-                    {
-                        price: {
-                            $between: [parseInt(req.body.from), parseInt(req.body.to)]
-                        }
-                    },
-                    {
-                        condition: 
-                        {
-                            $eq: req.body.condition
-                        }
-                    }
-                ]
+                condition:
+                {
+                    $eq: req.body.condition
+                }
             }
         })
             .then((listings) => {
@@ -108,7 +95,43 @@ route.post('/filter', (req, res) => {
             })
             .catch((err) => {
                 console.log(err);
-                
+
+                res.status(500).send({
+                    error: "Could not retrive listings"
+                })
+            })
+    }
+    else {
+        res.status(501).send({
+            error: "not logged in"
+        })
+    }
+})
+
+
+route.post('/filterByprice', (req, res) => {
+    console.log(req.session.user);
+    console.log(req.body.from, req.body.to);
+
+    if (req.session.user) {
+        if (isNaN(req.body.from) || isNaN(req.body.to) || req.body.from == '' || req.body.to == '') {
+            return res.status(501).send({
+                error: "Not a valid price range"
+            })
+        }
+        Listing.findAll({
+            where: {
+                price: {
+                    $between: [parseInt(req.body.from), parseInt(req.body.to)]
+                }
+            }
+        })
+            .then((listings) => {
+                res.status(200).send(listings)
+            })
+            .catch((err) => {
+                console.log(err);
+
                 res.status(500).send({
                     error: "Could not retrive listings"
                 })
@@ -126,9 +149,8 @@ route.post('/filter', (req, res) => {
 route.post('/add', upload.single('bookimage'), (req, res) => {
     console.log("in add");
     if (req.session.user) {
-        if(isNaN(req.body.price))
-        {
-           return res.status(501).send({
+        if (isNaN(req.body.price)) {
+            return res.status(501).send({
                 error: "Not A valid Price"
             })
         }
