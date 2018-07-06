@@ -131,10 +131,31 @@ const Wishlist = db.define('wishlists',{
 Wishlist.belongsTo(User);
 Wishlist.belongsTo(Listing);
 
+
+const Message = db.define('messages',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    receiverId:{
+        type: Sequelize.INTEGER,
+        allowNull:false
+    },
+    senderId:{
+        type: Sequelize.INTEGER,
+        allowNull:false
+    },
+    message:{
+        type:Sequelize.STRING,
+        allowNull:false
+    }
+})
+
 db.sync()
     .then(() => console.log("Database has been synced"))
     .catch((err) => console.error("Error creating database"))
 
 exports = module.exports = {
-    User, Listing ,Wishlist
+    User, Listing ,Wishlist,Message
 }
