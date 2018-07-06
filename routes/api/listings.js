@@ -182,4 +182,24 @@ route.post('/add', upload.single('bookimage'), (req, res) => {
 })
 
 
+route.get('/:id', (req, res) => {
+    console.log("in req");
+    
+    Listing.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then((listing) => {
+            res.status(201).send(listing)
+        }).catch((err) => {
+            console.log(err);
+            res.status(501).send({
+                error: err
+            })
+        })
+
+})
+
+
 exports = module.exports = route
