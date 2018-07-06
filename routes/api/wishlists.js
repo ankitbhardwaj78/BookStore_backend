@@ -6,7 +6,7 @@ route.get('/', (req, res) => {
     if (req.session.user) {
         Wishlist.findAll({
             where: {
-                userID: req.session.user.id
+                userID: parseInt(req.session.user.id)
             }
         })
             .then((wishlists) => {
@@ -31,9 +31,14 @@ route.get('/', (req, res) => {
 
 route.post('/',(req,res)=>{
     if (req.session.user) {
+        console.log(req.body);
+        
         Wishlist.create({
             userId: parseInt(req.session.user.id),
-            listingId: req.body.id
+            bookname: req.body.product.bookname,
+            authorname: req.body.product.authorname,
+            price: req.body.product.price,
+            image:req.body.product.image
         }).then((wishlist) => {
             res.status(201).send(wishlist)
         }).catch((err) => {

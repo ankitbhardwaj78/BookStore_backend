@@ -89,6 +89,10 @@ const Listing = db.define('listings', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    sellerName:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     bookname: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -126,10 +130,25 @@ const Wishlist = db.define('wishlists',{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
+    },
+    image:{
+        type: Sequelize.STRING,
+        allowNull:false
+    },
+    price:{
+        type: Sequelize.INTEGER,
+        allowNull:false
+    },
+    bookname:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    authorname:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 })
 Wishlist.belongsTo(User);
-Wishlist.belongsTo(Listing);
 
 
 const Message = db.define('messages',{
@@ -148,6 +167,10 @@ const Message = db.define('messages',{
     },
     message:{
         type:Sequelize.STRING,
+        allowNull:false
+    },
+    receiverId:{
+        type: Sequelize.INTEGER,
         allowNull:false
     }
 })

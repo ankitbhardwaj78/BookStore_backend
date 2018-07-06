@@ -160,6 +160,7 @@ route.post('/add', upload.single('bookimage'), (req, res) => {
             image: req.file.path,
             condition: req.body.condition,
             price: req.body.price,
+            sellerName: req.session.user.name,
             userId: parseInt(req.session.user.id)
         }).then((listing) => {
             res.status(201).send(listing)

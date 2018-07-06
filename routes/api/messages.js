@@ -6,9 +6,7 @@ route.get('/',(req,res)=>{
     if (req.session.user) {
         Message.findAll({
             where:{
-                receiverName:{
-                    $eq: req.session.user.name
-                }
+                receiverId:req.session.user.id
             }
         })
             .then((listings) => {
@@ -29,13 +27,14 @@ route.get('/',(req,res)=>{
 
 
 route.post('/',(req,res)=>{
-    console.log(req.body.id);
+    console.log(req.body);
     
     if (req.session.user) {
        Message.create({
             receiverName: req.body.name,
             senderName: req.session.user.name,
-            message: req.body.message
+            message: req.body.message,
+            receiverId: req.session.user.id
         }).then((listing) => {
             res.status(201).send(listing)
         }).catch((err) => {
