@@ -138,12 +138,12 @@ const Message = db.define('messages',{
         autoIncrement: true,
         primaryKey: true
     },
-    receiverId:{
-        type: Sequelize.INTEGER,
+    receiverName:{
+        type: Sequelize.STRING,
         allowNull:false
     },
-    senderId:{
-        type: Sequelize.INTEGER,
+    senderName:{
+        type: Sequelize.STRING,
         allowNull:false
     },
     message:{

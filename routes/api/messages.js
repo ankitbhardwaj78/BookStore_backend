@@ -6,7 +6,9 @@ route.get('/',(req,res)=>{
     if (req.session.user) {
         Message.findAll({
             where:{
-                receiverId: parseInt(req.session.user.id)
+                receiverName:{
+                    $eq: req.session.user.name
+                }
             }
         })
             .then((listings) => {
@@ -31,8 +33,8 @@ route.post('/',(req,res)=>{
     
     if (req.session.user) {
        Message.create({
-            receiverId: req.body.id,
-            senderId: parseInt(req.session.user.id),
+            receiverName: req.body.name,
+            senderName: req.session.user.name,
             message: req.body.message
         }).then((listing) => {
             res.status(201).send(listing)
