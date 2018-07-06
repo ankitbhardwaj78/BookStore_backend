@@ -90,6 +90,7 @@ route.get('/isloggedin', function (req, res) {
     {
         res.send({
             done:true,
+            name:req.session.user.name
         })
     }
     else

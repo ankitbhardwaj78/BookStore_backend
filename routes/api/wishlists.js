@@ -10,9 +10,7 @@ route.get('/', (req, res) => {
             }
         })
             .then((wishlists) => {
-                res.status(200).send({
-                    wishlists
-                });
+                res.status(200).send(wishlists);
             })
             .catch((err) => {
                 console.log(err);
