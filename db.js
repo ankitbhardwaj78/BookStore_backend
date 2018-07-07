@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const bcrypt =require('bcrypt-nodejs')
 
-const db = new Sequelize('bookstoredb', 'bookseller', 'bookpass', {
-    host: 'localhost',
+const db = new Sequelize('heroku_b056f6f62e4a083', 'b237aa20fa2ef4', 'dcd3f4f7', {
+    host: 'us-cdbr-iron-east-04.cleardb.net',
     dialect: 'mysql',
     pool: {
         min: 0,
