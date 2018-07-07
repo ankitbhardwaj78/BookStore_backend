@@ -37,7 +37,6 @@ route.post('/signin', (req, res) => {
             }
         })
         .catch((err) => {
-            console.log(err);
             req.session.user = null;
             res.status(500).send({
                 error: "Invalid email or password"
@@ -78,7 +77,6 @@ route.get('/logout', function (req, res) {
             console.log(err);
         } else {
             res.status(200).send({
-
                 msg: "successfully logged out"
             })
         }
