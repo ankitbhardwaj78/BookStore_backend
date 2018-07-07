@@ -494,7 +494,7 @@ module.exports = "@charset \"utf-8\";\n/* RESET */\n*, :before, :after {\n    bo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- CONTAINER  -->\n<div class=\"mainContent\">\n  <!-- LIST FORM -->\n  <div class=\"row filterGroup\">\n    <form  class=\"formSearch fl\">\n      <input type=\"text\" class=\"inputSearch\" placeholder=\"Search\" #query>\n      <button type=\"submit\" class=\"btnSearch\" (click)=\"search(query.value)\">\n        <i class=\"fa fa-search\"></i>\n      </button>\n    </form>\n    <div class=\"areaFilter fr row\">\n      <div class=\"boxSelect fr\">\n        <ul class=\"optionSelect\">\n          <li sortIndex=\"0\">\n            <a (click)=\"sortbyprice()\">Price</a>\n          </li>\n          <li sortIndex=\"1\">\n            <a (click)=\"sortByCondition()\">Condition</a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    <div class=\"boxFilter\">\n        <div class=\"btnFilter\"><span class=\"fa fa-close\"></span>Close</div>\n  <!--             GROUP -->\n        <div class=\"row\">\n            <p><b>By Condition</b></p><br>\n            <select name=\"Condition\" #condition>\n                <option value=\"New\">New</option>\n                <option value=\"Almost new\">Almost new</option>\n                <option value=\"Slight damge\">Slight damage</option>\n                <option value=\"Worn\">Worn</option>\n            </select> \n            <button (click)=\"filterByCondition(condition.value)\">Filter</button><br><br>\n            <p class=\"titleInput\"><b>By Price</b></p> \n            <div class=\"areaValue\">\n                <p>From</p>\n                <input type=\"text\" class=\"rangeValue\" #from>\n                <p>To</p>\n                <input type=\"text\" class=\"rangeValue\" #to><br>\n            </div>\n            <button (click)=\"filterByPrice(from.value,to.value)\">Filter</button>\n        </div>\n  </div>            \n\n  <!-- CATE LIST    -->\n  <form action=\"\" method=\"GET\" name=\"listForm\" class=\"form scrollX\">\n    <div class=\"formHeader row\" style=\"display: flex; justify-content: space-between\">\n      <div style=\"display: flex;\">\n      <p style=\"margin: auto;\"><b>Filter By Condition</b></p>&nbsp;&nbsp;\n      <select name=\"Condition\" #condition style=\"background: transparent;margin-top: 5px;\">\n          <option value=\"New\">New</option>\n          <option value=\"Almost new\">Almost new</option>\n          <option value=\"Slight damge\">Slight damage</option>\n          <option value=\"Worn\">Worn</option>\n      </select>&nbsp;\n      <button (click)=\"filterByCondition(condition.value)\" style=\"background-color:#2a3f54;color:white;border-radius: 10px;\">Filter</button><br><br>\n      </div>\n      <div>\n      \n      <div class=\"areaValue\" style=\"display: flex;margin: 0px;\">\n          <p style=\"margin: auto;\"><b>By Price</b></p>&nbsp;&nbsp;\n          <p>From</p>&nbsp;\n          <input type=\"number\" class=\"rangeValue\" #from>&nbsp;\n          <p>To</p>&nbsp;\n          <input type=\"number\" class=\"rangeValue\" #to>&nbsp;\n          <button (click)=\"filterByPrice(from.value,to.value)\"  style=\"background-color:#2a3f54;color:white;border-radius: 10px;\">Filter</button>\n      </div>\n    \n      </div>\n    </div>\n  </form>\n\n  <!-- listing card -->\n  <div class=\"row\" style=\"background-color: #eaebee;\">\n    <div class=\"box-wrapper column\" *ngFor=\"let listing of listings\" style=\"margin-top: 5%;\">\n      <img src=\"http://localhost:3000/{{listing.image}}\" alt=\"rhcp\" height=\"200px\" width=\"100%\" />\n      <div class=\"box-content\">\n        <a class=\"buy\" href=\"javascript:void(0)\">\n          <span>\n            <i class=\"fa fa-cart-plus\" (click)=\"addToWishlist(listing)\"></i>\n          </span>\n        </a>\n        <div class=\"title\">{{listing.bookname}}</div>\n        <div class=\"desc\"><b><span>By : </span></b>{{listing.authorname}}</div>\n        <span class=\"price\">{{listing.price}}$</span>\n        <div class=\"footer\">\n          <ul>\n            <button id=\"view_book\" (click)=\"bookdetail(listing.id)\"><i class=\"fas fa-eye\"></i>View Book</button>\n          </ul>\n        </div>\n      </div>\n      <div class=\"success\"></div>\n    </div>\n\n  </div>\n\n</div>\n"
+module.exports = "<!-- CONTAINER  -->\n<div class=\"mainContent\">\n  <!-- LIST FORM -->\n  <div class=\"row filterGroup\">\n    <form  class=\"formSearch fl\">\n      <input type=\"text\" class=\"inputSearch\" placeholder=\"Search\" #query>\n      <button type=\"submit\" class=\"btnSearch\" (click)=\"search(query.value)\">\n        <i class=\"fa fa-search\"></i>\n      </button>\n    </form>\n    <div class=\"areaFilter fr row\">\n      <div class=\"boxSelect fr\">\n        <ul class=\"optionSelect\">\n          <li sortIndex=\"0\">\n            <a (click)=\"sortbyprice()\">Price</a>\n          </li>\n          <li sortIndex=\"1\">\n            <a (click)=\"sortByCondition()\">Condition</a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    <div class=\"boxFilter\">\n        <div class=\"btnFilter\"><span class=\"fa fa-close\"></span>Close</div>\n  <!--             GROUP -->\n        <div class=\"row\">\n            <p><b>By Condition</b></p><br>\n            <select name=\"Condition\" #condition>\n                <option value=\"New\">New</option>\n                <option value=\"Almost new\">Almost new</option>\n                <option value=\"Slight damge\">Slight damage</option>\n                <option value=\"Worn\">Worn</option>\n            </select> \n            <button (click)=\"filterByCondition(condition.value)\">Filter</button><br><br>\n            <p class=\"titleInput\"><b>By Price</b></p> \n            <div class=\"areaValue\">\n                <p>From</p>\n                <input type=\"text\" class=\"rangeValue\" #from>\n                <p>To</p>\n                <input type=\"text\" class=\"rangeValue\" #to><br>\n            </div>\n            <button (click)=\"filterByPrice(from.value,to.value)\">Filter</button>\n        </div>\n  </div>            \n\n  <!-- CATE LIST    -->\n  <form action=\"\" method=\"GET\" name=\"listForm\" class=\"form scrollX\">\n    <div class=\"formHeader row\" style=\"display: flex; justify-content: space-between\">\n      <div style=\"display: flex;\">\n      <p style=\"margin: auto;\"><b>Filter By Condition</b></p>&nbsp;&nbsp;\n      <select name=\"Condition\" #condition style=\"background: transparent;margin-top: 5px;\">\n          <option value=\"New\">New</option>\n          <option value=\"Almost new\">Almost new</option>\n          <option value=\"Slight damge\">Slight damage</option>\n          <option value=\"Worn\">Worn</option>\n      </select>&nbsp;\n      <button (click)=\"filterByCondition(condition.value)\" style=\"background-color:#2a3f54;color:white;border-radius: 10px;\">Filter</button><br><br>\n      </div>\n      <div>\n      \n      <div class=\"areaValue\" style=\"display: flex;margin: 0px;\">\n          <p style=\"margin: auto;\"><b>By Price</b></p>&nbsp;&nbsp;\n          <p>From</p>&nbsp;\n          <input type=\"number\" class=\"rangeValue\" #from>&nbsp;\n          <p>To</p>&nbsp;\n          <input type=\"number\" class=\"rangeValue\" #to>&nbsp;\n          <button (click)=\"filterByPrice(from.value,to.value)\"  style=\"background-color:#2a3f54;color:white;border-radius: 10px;\">Filter</button>\n      </div>\n    \n      </div>\n    </div>\n  </form>\n\n  <!-- listing card -->\n  <div class=\"row\" style=\"background-color: #eaebee;\">\n    <div class=\"box-wrapper column\" *ngFor=\"let listing of listings\" style=\"margin-top: 5%;\">\n      <img src=\"http://localhost:3000/{{listing.image}}\" alt=\"rhcp\" height=\"200px\" width=\"100%\" />\n      <div class=\"box-content\">\n        <a class=\"buy\" href=\"javascript:void(0)\">\n          <span>\n            <i class=\"fa fa-cart-plus\" (click)=\"addToWishlist(listing)\"></i>\n          </span>\n        </a>\n        <div class=\"title\">{{listing.bookname}}</div>\n        <div class=\"desc\"><b><span>By : </span></b>{{listing.authorname}}</div>\n        <span class=\"price\">{{listing.price}}Rs</span>\n        <div class=\"footer\">\n          <ul>\n            <button id=\"view_book\" (click)=\"bookdetail(listing.id)\"><i class=\"fas fa-eye\"></i>View Book</button>\n          </ul>\n        </div>\n      </div>\n      <div class=\"success\"></div>\n    </div>\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -568,16 +568,24 @@ var DisplaylistingComponent = /** @class */ (function () {
         var _this = this;
         this.listingservice.filterByCondition(condition)
             .subscribe(function (data) {
-            console.log(data);
-            _this.listings = JSON.parse(data["_body"]);
+            if (JSON.parse(data["_body"]) < 1) {
+                alert("No item found ");
+            }
+            else {
+                _this.listings = JSON.parse(data["_body"]);
+            }
         });
     };
     DisplaylistingComponent.prototype.filterByPrice = function (from, to) {
         var _this = this;
         this.listingservice.filterByPrice(from, to)
             .subscribe(function (data) {
-            console.log(JSON.parse(data["_body"]));
-            _this.listings = JSON.parse(data["_body"]);
+            if (JSON.parse(data["_body"]) < 1) {
+                alert("No item found for this range");
+            }
+            else {
+                _this.listings = JSON.parse(data["_body"]);
+            }
         });
     };
     DisplaylistingComponent.prototype.search = function (query) {
@@ -585,7 +593,12 @@ var DisplaylistingComponent = /** @class */ (function () {
         this.listingservice.search(query)
             .subscribe(function (data) {
             console.log(data);
-            _this.listings = JSON.parse(data["_body"]);
+            if (JSON.parse(data["_body"]) < 1) {
+                alert("Not found");
+            }
+            else {
+                _this.listings = JSON.parse(data["_body"]);
+            }
         });
     };
     DisplaylistingComponent.prototype.bookdetail = function (id) {
@@ -652,6 +665,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -663,12 +677,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(router, route) {
+    function HomeComponent(router, route, auth) {
         this.router = router;
         this.route = route;
+        this.auth = auth;
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.auth.isloggedin()
+            .subscribe(function (data) {
+            if (JSON.parse(data["_body"]).done) {
+                _this.route.navigate(['/listing']);
+            }
+        });
     };
     HomeComponent.prototype.signup = function () {
         this.route.navigate(['signup'], { relativeTo: this.router });
@@ -686,7 +709,8 @@ var HomeComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -835,7 +859,7 @@ var ListingComponent = /** @class */ (function () {
         this.route.navigate(['listing/add']);
     };
     ListingComponent.prototype.displayListingPage = function () {
-        this.route.navigate(['listing']);
+        this.route.navigate(['/home']);
     };
     ListingComponent.prototype.logout = function () {
         var _this = this;
@@ -886,7 +910,7 @@ module.exports = "@import url('https://fonts.googleapis.com/css?family=Cookie|Mo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"home\">\n    <div class=\"center-block\">\n      <p>Welcome To Book Bazaar!</p>\n      <h1>It’s nice to Meet you</h1>\n      <a class=\"button\" (click)=\"signin()\">Sign In to Continue</a>\n    </div>\n  </section>\n  \n  <section class=\"services\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>What We Provide</h2>\n        <p>An online platform to buy and sell old books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSY2z.png\" alt=\"service icon\">\n        </div>\n        <h3>Sell Your Books</h3>\n        <p>We provide an onlien platform to sell your old or new books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSLY5.png\" alt=\"service icon\">\n        </div>\n        <h3>Buy Books</h3>\n        <p>We provide an onlien platform to buy old, new a large variety of books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSvBC.png\" alt=\"service icon\">\n        </div>\n        <h3>Web Security</h3>\n        <p>Proin iaculis purus consequat sem cure \ndigni ssim. Donec porttitora entum suscipit \naenean rhoncus posuere odio in tincidunt.</p>\n      </div>\n    </div>\n  </section>\n  \n \n  \n    \n  <section class=\"team\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>Developed By</h2>\n      </div>\n      <div class=\"team-item\">\n        <img src=\"../../assets/ankit.jpg\">\n        <p>Ankit Bhardwaj</p>\n        <span>Full Stack Developer</span>\n        <div class=\"socmedia-wrap\">\n          <a class=\"twitter twitter-still\" href=\"#\"></a>\n          <a class=\"facebook facebook-still\" href=\"#\"></a>\n          <a class=\"google google-still\" href=\"#\"></a>\n        </div>\n      </div>\n      <p>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt proin iaculis.</p>\n    </div>\n  </section>\n  \n  <section class=\"logos\">\n    <div class=\"center-block\">\n      <div class=\"logos-links\">\n        <a><img src=\"https://i.lensdump.com/i/8TSK2Z.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSfpF.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSFF3.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSpCP.png\" alt=\"partner logo\"></a>\n      </div>\n    </div>\n  </section>\n  \n  <section class=\"contacts\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>contact us</h2>\n        <p>You Can contact us through email or through any social platform.</p>\n      </div>\n    </div>\n  </section>\n  \n  <footer>\n    <div class=\"center-block\">\n      <p>© Copyright 2018 </p>\n      <div class=\"socmedia-wrap\">\n        <a class=\"twitter twitter-footer\" href=\"https://twitter.com/AnkitBh39021891\"></a>\n        <a class=\"facebook facebook-footer\" href=\"https://www.facebook.com/ankit.bhardwaj.50702\"></a>\n        <a class=\"google google-footer\"></a>\n      </div>\n    </div> \n  </footer>"
+module.exports = "<section class=\"home\">\n    <div class=\"center-block\">\n      <p>Welcome To Book Bazaar!</p>\n      <h1>It’s nice to Meet you</h1>\n      <a class=\"button\" (click)=\"signin()\">Sign In to Continue</a>\n    </div>\n  </section>\n  \n  <section class=\"services\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>What We Provide</h2>\n        <p>An online platform to buy and sell old books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSY2z.png\" alt=\"service icon\">\n        </div>\n        <h3>Sell Your Books</h3>\n        <p>We provide an onlien platform to sell your old or new books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSLY5.png\" alt=\"service icon\">\n        </div>\n        <h3>Buy Books</h3>\n        <p>We provide an onlien platform to buy old, new a large variety of books</p>\n      </div>\n      <div class=\"services-item\">\n        <div class=\"icon-wrap\">\n          <img class=\"services-item-icon\" src=\"https://i.lensdump.com/i/8TSvBC.png\" alt=\"service icon\">\n        </div>\n        <h3>Web Security</h3>\n        <p>Proin iaculis purus consequat sem cure \ndigni ssim. Donec porttitora entum suscipit \naenean rhoncus posuere odio in tincidunt.</p>\n      </div>\n    </div>\n  </section>\n  \n \n  \n    \n  <section class=\"team\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>Developed By</h2>\n      </div>\n      <div class=\"team-item\">\n        <img src=\"../../assets/ankit.jpg\">\n        <p>Ankit Bhardwaj</p>\n        <span>Full Stack Developer</span>\n        <div class=\"socmedia-wrap\">\n          <a class=\"twitter twitter-still\" href=\"https://twitter.com/AnkitBh39021891\"></a>\n          <a class=\"facebook facebook-still\" href=\"https://www.facebook.com/ankit.bhardwaj.50702\"></a>\n          <a class=\"google google-still\"></a>\n        </div>\n      </div>\n      <p>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit aenean rhoncus posuere odio in tincidunt proin iaculis.</p>\n    </div>\n  </section>\n  \n  <section class=\"logos\">\n    <div class=\"center-block\">\n      <div class=\"logos-links\">\n        <a><img src=\"https://i.lensdump.com/i/8TSK2Z.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSfpF.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSFF3.png\" alt=\"partner logo\"></a>\n        <a><img src=\"https://i.lensdump.com/i/8TSpCP.png\" alt=\"partner logo\"></a>\n      </div>\n    </div>\n  </section>\n  \n  <section class=\"contacts\">\n    <div class=\"center-block\">\n      <div class=\"title\">\n        <h2>contact us</h2>\n        <p>You Can contact us through email or through any social platform.</p>\n      </div>\n    </div>\n  </section>\n  \n  <footer>\n    <div class=\"center-block\">\n      <p>© Copyright 2018 </p>\n      <div class=\"socmedia-wrap\">\n        <a class=\"twitter twitter-footer\" href=\"https://twitter.com/AnkitBh39021891\"></a>\n        <a class=\"facebook facebook-footer\" href=\"https://www.facebook.com/ankit.bhardwaj.50702\"></a>\n        <a class=\"google google-footer\"></a>\n      </div>\n    </div> \n  </footer>"
 
 /***/ }),
 
@@ -1119,6 +1143,7 @@ var SigninComponent = /** @class */ (function () {
             .subscribe(function (data) {
             _this.router.navigateByUrl('');
         }, function (error) {
+            console.log(JSON.parse(error["_body"]));
             alert(JSON.parse(error["_body"]).error);
         });
         this.myForm.reset();
