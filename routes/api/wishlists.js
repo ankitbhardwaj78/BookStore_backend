@@ -20,23 +20,23 @@ route.get('/', (req, res) => {
                 })
             });
     }
-    else{
+    else {
         res.status(500).send({
             error: "User not logged in"
         })
     }
 })
 
-route.post('/',(req,res)=>{
+route.post('/', (req, res) => {
     if (req.session.user) {
         console.log(req.body);
-        
+
         Wishlist.create({
             userId: parseInt(req.session.user.id),
             bookname: req.body.product.bookname,
             authorname: req.body.product.authorname,
             price: req.body.product.price,
-            image:req.body.product.image
+            image: req.body.product.image
         }).then((wishlist) => {
             res.status(201).send(wishlist)
         }).catch((err) => {
@@ -47,7 +47,31 @@ route.post('/',(req,res)=>{
         })
 
     }
-    else{
+    else {
+        res.status(501).send({
+            error: "user not logged in"
+        })
+    }
+})
+
+
+route.post('/remove', (req, res) => {
+    if (req.session.user) {
+        Wishlist.destroy({
+            where: {
+                userId: req.session.user.id,
+                bookname:req.body.item.bookname,
+                authorname:req.body.item.authorname
+            }
+        })
+            .then((wishlist) => {
+                res.send("removed successfully");
+            })
+            .catch((err) => {
+                res.send("errrrrrr")
+            })
+    }
+    else {
         res.status(501).send({
             error: "user not logged in"
         })
