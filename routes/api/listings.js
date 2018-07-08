@@ -145,6 +145,12 @@ route.post('/filterByprice', (req, res) => {
 })
 
 
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'ankitbookstore', 
+  api_key: '449478132974621', 
+  api_secret: 'TphNWDqq5_bA_HNbKKn7hIGlcJY'
+});
 
 route.post('/add', upload.single('bookimage'), (req, res) => {
     console.log("in add");
@@ -154,25 +160,27 @@ route.post('/add', upload.single('bookimage'), (req, res) => {
                 error: "Not A valid Price"
             })
         }
-        Listing.create({
-            bookname: req.body.bookname,
-            authorname: req.body.authorname,
-            image: req.file.path,
-            condition: req.body.condition,
-            price: req.body.price,
-            sellerName: req.session.user.name,
-            userId: parseInt(req.session.user.id)
-        }).then((listing) => {
-            res.status(201).send(listing)
-        }).catch((err) => {
-            console.log(err);
-
-            res.status(501).send({
-
-                error: err
+        cloudinary.uploader.upload(req.file.path, function(result) {
+            // add cloudinary url for the image to the campground object under image property
+            Listing.create({
+                bookname: req.body.bookname,
+                authorname: req.body.authorname,
+                image: result.secure_url,
+                condition: req.body.condition,
+                price: req.body.price,
+                sellerName: req.session.user.name,
+                userId: parseInt(req.session.user.id)
+            }).then((listing) => {
+                res.status(201).send(listing)
+            }).catch((err) => {
+                console.log(err);
+    
+                res.status(501).send({
+    
+                    error: err
+                })
             })
-        })
-
+          });
     }
     else {
         res.status(501).send({
