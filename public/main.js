@@ -468,7 +468,7 @@ var BookdetailComponent = /** @class */ (function () {
         });
     };
     BookdetailComponent.prototype.onSubmit = function (message) {
-        this.messageService.sendMessage(this.listing["sellerName"], message)
+        this.messageService.sendMessage(this.listing["sellerName"], this.listing["userId"], message)
             .subscribe(function (data) {
             alert("Message Sent SuccessFully");
         }, function (error) {
@@ -570,7 +570,6 @@ var DisplaylistingComponent = /** @class */ (function () {
         this.auth.isloggedin()
             .subscribe(function (data) {
             if (!JSON.parse(data["_body"]).done) {
-                alert("please login to continue");
                 _this.route.navigate(['/home']);
             }
         });
@@ -1031,8 +1030,8 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.getMessage = function () {
         return this.http.get('/api/messages');
     };
-    MessageService.prototype.sendMessage = function (name, message) {
-        return this.http.post('/api/messages', { name: name, message: message });
+    MessageService.prototype.sendMessage = function (name, id, message) {
+        return this.http.post('/api/messages', { name: name, id: id, message: message });
     };
     MessageService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

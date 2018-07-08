@@ -34,7 +34,7 @@ route.post('/',(req,res)=>{
             receiverName: req.body.name,
             senderName: req.session.user.name,
             message: req.body.message,
-            receiverId: req.session.user.id
+            receiverId: req.body.id
         }).then((listing) => {
             res.status(201).send(listing)
         }).catch((err) => {
