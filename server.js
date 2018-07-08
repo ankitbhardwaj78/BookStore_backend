@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use('/', express.static(path.join(__dirname, 'public')))
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+app.use('/uploads', express.static('uploads'))
 app.use('/api', require('./routes/api').route)
 
 app.set('port', process.env.PORT || 3000)
